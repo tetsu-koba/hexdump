@@ -1,6 +1,11 @@
 #!/bin/sh -eux
-zig test src/hexdump.zig
-zig build -Drelease-small=true
+if [ $# -eq 0 ]; then
+    OPTS=-Drelease-safe=false
+else
+    OPTS=$1
+fi
+zig test $OPTS src/hexdump.zig
+zig build $OPTS
 OUTDIR=./.test_output
 rm -rf $OUTDIR
 mkdir $OUTDIR
