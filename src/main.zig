@@ -28,6 +28,7 @@ pub fn main() !void {
     while(n == 16) : (offset += n) {
         n = try file.readAll(&buf);
         if (n == 0) {
+            try stdout.print("{x:0>8}\n",.{offset});
             break;
         }
         try stdout.print("{x:0>8}  ",.{offset});
