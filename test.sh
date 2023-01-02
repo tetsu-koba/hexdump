@@ -1,4 +1,5 @@
 #!/bin/sh -eux
+zig test src/hexdump.zig
 zig build -Drelease-small=true
 OUTDIR=./.test_output
 rm -rf $OUTDIR
