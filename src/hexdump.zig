@@ -36,15 +36,24 @@ pub fn toOctalPrintable(input: []const u8, output: []u8) ![]u8 {
 }
 
 test "toHex" {
-    const buf = [_]u8{0x01, 0x02, 0x7f, 0xff, 0x80, 0x41, 0x61, 0x32, };
-    var wbuf:[32]u8 = undefined;
+    const buf = [_]u8{
+        0x01,
+        0x02,
+        0x7f,
+        0xff,
+        0x80,
+        0x41,
+        0x61,
+        0x32,
+    };
+    var wbuf: [32]u8 = undefined;
     const x = try toHex(&buf, &wbuf);
     try expect(mem.eql(u8, x, "01 02 7f ff 80 41 61 32 "));
 }
 
 test "toHex NoSpaceLeft" {
-    const buf = [_]u8{0x01, 0x02, 0x7f};
-    var wbuf:[2]u8 = undefined;
+    const buf = [_]u8{ 0x01, 0x02, 0x7f };
+    var wbuf: [2]u8 = undefined;
     _ = toHex(&buf, &wbuf) catch |e| {
         try expect(e == error.NoSpaceLeft);
         return;
@@ -53,15 +62,24 @@ test "toHex NoSpaceLeft" {
 }
 
 test "toPrintable" {
-    const buf = [_]u8{0x01, 0x02, 0x7f, 0xff, 0x80, 0x41, 0x61, 0x32, };
-    var wbuf:[32]u8 = undefined;
+    const buf = [_]u8{
+        0x01,
+        0x02,
+        0x7f,
+        0xff,
+        0x80,
+        0x41,
+        0x61,
+        0x32,
+    };
+    var wbuf: [32]u8 = undefined;
     const x = try toPrintable(&buf, &wbuf);
     try expect(mem.eql(u8, x, ".....Aa2"));
 }
 
 test "toPrintable NoSpaceLeft" {
-    const buf = [_]u8{0x01, 0x02, 0x7f};
-    var wbuf:[2]u8 = undefined;
+    const buf = [_]u8{ 0x01, 0x02, 0x7f };
+    var wbuf: [2]u8 = undefined;
     _ = toPrintable(&buf, &wbuf) catch |e| {
         try expect(e == error.NoSpaceLeft);
         return;
@@ -71,14 +89,14 @@ test "toPrintable NoSpaceLeft" {
 
 test "toOctalPrintable" {
     const buf = "\x00\x01hello.txt\x00octet\x00";
-    var wbuf:[32]u8 = undefined;
+    var wbuf: [32]u8 = undefined;
     const x = try toOctalPrintable(buf, &wbuf);
     try expect(mem.eql(u8, x, "\\0\\1hello.txt\\0octet\\0"));
 }
 
 test "toOctalPrintable NoSpaceLeft" {
-    const buf = [_]u8{0x01, 0x02, 0x7f};
-    var wbuf:[2]u8 = undefined;
+    const buf = [_]u8{ 0x01, 0x02, 0x7f };
+    var wbuf: [2]u8 = undefined;
     _ = toPrintable(&buf, &wbuf) catch |e| {
         try expect(e == error.NoSpaceLeft);
         return;
