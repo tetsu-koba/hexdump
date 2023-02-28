@@ -1,8 +1,8 @@
 #!/bin/sh -eux
 if [ $# -eq 0 ]; then
-    OPTS=-Drelease-safe=false
+    OPTS=-Doptimize=Debug
 else
-    OPTS=$1
+    OPTS=-Doptimize=$1
 fi
 zig test $OPTS src/hexdump.zig
 zig build $OPTS

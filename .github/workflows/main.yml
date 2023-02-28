@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest]
-        release: [release-safe=false, release-safe=true, release-fast=true, release-small=true]
+        optimize: [Debug, ReleaseSafe, ReleaseFast, ReleaseSmall]
     runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
       - uses: goto-bus-stop/setup-zig@v2.0.1
         with:
           version: master
-      - run: ./test.sh -D${{ matrix.release }}
+      - run: ./test.sh ${{ matrix.optimize }}
   lint:
     runs-on: ubuntu-latest
     steps:
