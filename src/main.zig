@@ -8,7 +8,7 @@ pub fn main() !void {
 
     if (args.len < 2) {
         std.debug.print("Usage: {s} input_file\n", .{args[0]});
-        std.os.exit(1);
+        std.posix.exit(1);
     }
     const inputfile = std.mem.sliceTo(args[1], 0);
     var file = try std.fs.cwd().openFile(inputfile, .{});
